@@ -1,0 +1,30 @@
+network-manager-fortisslvpn (1.2.10-0ubuntu3) jammy; urgency=medium
+
+  * No change rebuild for ppp 2.4.9-1+1ubuntu3
+
+ -- Robie Basak <robie.basak@ubuntu.com>  Mon, 28 Feb 2022 11:25:09 +0000
+
+network-manager-fortisslvpn (1.2.10-0ubuntu2) impish; urgency=medium
+
+  * No-change rebuild against ppp 2.4.9
+
+ -- Graham Inggs <ginggs@ubuntu.com>  Mon, 23 Aug 2021 12:30:32 +0000
+
+network-manager-fortisslvpn (1.2.10-0ubuntu1) focal; urgency=medium
+
+  * New upstream version 1.2.10.
+  * Update copyright.
+
+ -- Mattia Rizzolo <mapreri@ubuntu.com>  Wed, 01 Apr 2020 14:56:46 +0200
+
+network-manager-fortisslvpn (1.2.8-2) sid; urgency=medium
+
+  * Install /var/lib/NetworkManager-fortisslvpn. (Closes: #891355)
+
+ -- Lubomir Rintel <lkundrak@v3.sk>  Tue, 10 Jul 2018 16:56:00 +0200
+
+network-manager-fortisslvpn (1.2.8-1) sid; urgency=medium
+
+  * Initial release. (Closes: #835938)
+
+ -- Lubomir Rintel <lkundrak@v3.sk>  Mon, 22 Jan 2018 10:00:00 +0100

@@ -1,0 +1,27 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+PPPD_PLUGIN_DIR := $(shell dh_ppp --plugin-dir)
+
+%:
+	dh $@ --with ppp
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		--libexecdir=/usr/lib/NetworkManager \
+		--disable-static \
+		--without-libnm-glib \
+		--with-pppd-plugin-dir=$(PPPD_PLUGIN_DIR)
+
+override_dh_makeshlibs:
+	dh_makeshlibs -X/usr/lib/$(DEB_HOST_MULTIARCH)/NetworkManager/ -X/usr/lib/pppd/
+
+override_dh_install:
+	find debian/tmp -name '*.la' -print -delete
+	dh_install
+
+override_dh_missing:
+	dh_missing --fail-missing

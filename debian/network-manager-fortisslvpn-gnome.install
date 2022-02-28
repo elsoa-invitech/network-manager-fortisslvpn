@@ -1,0 +1,3 @@
+usr/lib/*/NetworkManager/libnm-vpn-plugin-fortisslvpn-editor.so
+usr/lib/NetworkManager/nm-fortisslvpn-auth-dialog
+usr/share/appdata/network-manager-fortisslvpn.metainfo.xml

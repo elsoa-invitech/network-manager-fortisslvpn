@@ -1,0 +1,7 @@
+etc/
+usr/lib/pppd/*/*.so
+usr/lib/NetworkManager/VPN/nm-fortisslvpn-service.name
+usr/lib/NetworkManager/nm-fortisslvpn-service
+usr/lib/*/NetworkManager/libnm-vpn-plugin-fortisslvpn.so
+usr/share/locale/
+var/lib/NetworkManager-fortisslvpn/
