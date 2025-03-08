@@ -337,6 +337,7 @@ get_credentials (NMSettingVpn *s_vpn,
                  const char **username,
                  const char **password,
                  const char **otp,
+                 const char **cookie,
                  GError **error)
 {
 	/* Username; try SSLVPN specific username first, then generic username */
@@ -361,7 +362,14 @@ get_credentials (NMSettingVpn *s_vpn,
 		return FALSE;
 	}
 
+	if (strcmp (*username, "saml-login") == 0) {
+		*otp = NULL;
+		*cookie = nm_setting_vpn_get_secret (s_vpn, NM_FORTISSLVPN_KEY_OTP);
+		return TRUE;
+	}
+
 	*otp = nm_setting_vpn_get_secret (s_vpn, NM_FORTISSLVPN_KEY_OTP);
+	*cookie = NULL;
 
 	return TRUE;
 }
@@ -373,7 +381,7 @@ real_connect (NMVpnServicePlugin *plugin, NMConnection *connection, GError **err
 	NMSettingVpn *s_vpn;
 	mode_t old_umask;
 	gchar *config;
-	const char *username, *password, *realm, *otp;
+	const char *username, *password, *realm, *otp, *cookie;
 
 	g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
@@ -386,7 +394,7 @@ real_connect (NMVpnServicePlugin *plugin, NMConnection *connection, GError **err
 	if (!nm_fortisslvpn_properties_validate_secrets (s_vpn, error))
 		return FALSE;
 
-	if (!get_credentials (s_vpn, &username, &password, &otp, error))
+	if (!get_credentials (s_vpn, &username, &password, &otp, &cookie, error))
 		return FALSE;
 
 	realm = nm_setting_vpn_get_data_item (s_vpn, NM_FORTISSLVPN_KEY_REALM);
@@ -406,8 +414,10 @@ real_connect (NMVpnServicePlugin *plugin, NMConnection *connection, GError **err
 	config = g_strdup_printf ("username = %s\n"
 	                          "password = %s"
 	                          "%s%s"
+	                          "%s%s"
 	                          "%s%s\n",
 	                          username, password,
+	                          cookie ? "\ncookie = " : "", cookie ? cookie : "",
 	                          realm ? "\nrealm = " : "", realm ? realm : "",
 	                          otp ? "\notp = " : "", otp ? otp : "");
 	old_umask = umask (0077);
