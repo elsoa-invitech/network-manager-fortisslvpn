@@ -214,6 +214,71 @@ get_secrets (const char *vpn_uuid,
 	return TRUE;
 }
 
+static gboolean
+get_cookie (const char *vpn_uuid,
+            const char *vpn_name,
+            gboolean retry,
+            gboolean allow_interaction,
+            gboolean external_ui_mode,
+            const char *gw,
+            const char *trusted_cert,
+            char **out_password,
+            char **out_cookie,
+            NMSettingSecretFlags password_flags,
+            NMSettingSecretFlags otp_flags)
+{
+	GPtrArray *argv;
+	GError *error = NULL;
+	gchar *command_output = NULL;
+	gint exit_status = 0;
+
+	g_return_val_if_fail (vpn_uuid != NULL, FALSE);
+	g_return_val_if_fail (vpn_name != NULL, FALSE);
+	g_return_val_if_fail (out_password != NULL, FALSE);
+	g_return_val_if_fail (*out_password == NULL, FALSE);
+	g_return_val_if_fail (out_cookie != NULL, FALSE);
+	g_return_val_if_fail (*out_cookie == NULL, FALSE);
+
+	/* Don't ask if the no secrets are needed is unused */
+	if (   password_flags & NM_SETTING_SECRET_FLAG_NOT_REQUIRED
+	    && !(otp_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED)) {
+		return TRUE;
+	}
+
+	if (allow_interaction == FALSE
+	           || (!retry && !(password_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED))) {
+		/* If interaction isn't allowed, just return existing secrets.
+		 * Also, don't ask the user if we don't need a new password (ie, !retry),
+		 * we have an existing PW, and the password is saved.
+		 */
+
+		return TRUE;
+	}
+
+	argv = g_ptr_array_new_with_free_func (g_free);
+	g_ptr_array_add (argv, (gpointer) g_strdup ("/usr/bin/openfortivpn-webview"));
+
+	g_ptr_array_add (argv, (gpointer) g_strdup (gw));
+
+	g_ptr_array_add (argv, (gpointer) g_strdup ("--trusted-cert"));
+	g_ptr_array_add (argv, (gpointer) g_strdup (trusted_cert));
+
+	g_ptr_array_add (argv, NULL);
+
+	if (!g_spawn_sync (NULL, (char **) argv->pdata, NULL,
+		G_SPAWN_STDERR_TO_DEV_NULL, NULL, NULL, &command_output, NULL, &exit_status, &error)) {
+		g_ptr_array_free (argv, TRUE);
+		return FALSE;
+	}
+	g_ptr_array_free (argv, TRUE);
+
+	*out_password = g_strdup ("dummy");
+	*out_cookie = g_strdup (command_output);
+	g_free(command_output);
+
+	return TRUE;
+}
+
 static void
 wait_for_quit (void)
 {
@@ -246,6 +311,7 @@ main (int argc, char *argv[])
 	char *vpn_name = NULL;
 	char *vpn_uuid = NULL;
 	char *vpn_service = NULL;
+	char *username = NULL;
 	char *password = NULL;
 	char *otp = NULL;
 	GHashTable *data = NULL, *secrets = NULL;
@@ -291,13 +357,28 @@ main (int argc, char *argv[])
 	nm_vpn_service_plugin_get_secret_flags (data, NM_FORTISSLVPN_KEY_PASSWORD, &password_flags);
 	nm_vpn_service_plugin_get_secret_flags (data, NM_FORTISSLVPN_KEY_OTP, &otp_flags);
 
-	if (!get_secrets (vpn_uuid, vpn_name, retry, allow_interaction, external_ui_mode,
-	                  g_hash_table_lookup (secrets, NM_FORTISSLVPN_KEY_PASSWORD),
+	username = g_hash_table_lookup (data, NM_FORTISSLVPN_KEY_USER);
+
+	fprintf(stderr, "nm_vpn_service_plugin_get_secret_flags: %s\n", username);
+
+	if (strcmp (username, "saml-login") == 0) {
+		if (!get_cookie (vpn_uuid, vpn_name, retry, allow_interaction, external_ui_mode,
+	                  g_hash_table_lookup (data, NM_FORTISSLVPN_KEY_GATEWAY),
+	                  g_hash_table_lookup (data, NM_FORTISSLVPN_KEY_TRUSTED_CERT),
 	                  &password,
 	                  &otp,
 	                  password_flags,
 	                  otp_flags))
-		return 1;
+			return 1;
+	} else {
+		if (!get_secrets (vpn_uuid, vpn_name, retry, allow_interaction, external_ui_mode,
+		                  g_hash_table_lookup (secrets, NM_FORTISSLVPN_KEY_PASSWORD),
+		                  &password,
+		                  &otp,
+		                  password_flags,
+		                  otp_flags))
+			return 1;
+	}
 
 	if (!external_ui_mode) {
 		/* dump the passwords to stdout */
