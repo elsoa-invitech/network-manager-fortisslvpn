@@ -1,3 +1,17 @@
+network-manager-fortisslvpn (1.2.10-0ubuntu3+elbandi1) jammy; urgency=medium
+
+  [ Első András ]
+  * Authdialog read cookie from openfortivpn-webview
+  * Set cookie to config file
+  * Disable external-ui-mode authdialog
+
+  [ Tomas Kovar ]
+  * service: fix peer DNS handling
+    https://gitlab.gnome.org/GNOME/NetworkManager-fortisslvpn/-/issues/20
+    https://gitlab.gnome.org/GNOME/NetworkManager-fortisslvpn/-/merge_requests/15
+
+ -- Első András <elsoa@invitech.hu>  Sun, 09 Mar 2025 21:48:18 +0100
+
 network-manager-fortisslvpn (1.2.10-0ubuntu3) jammy; urgency=medium
 
   * No change rebuild for ppp 2.4.9-1+1ubuntu3
