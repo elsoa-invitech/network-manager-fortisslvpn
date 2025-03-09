@@ -1,0 +1,37 @@
+name: Build Debian packages for Ubuntu 22.04
+
+on:
+  push:
+    branches:
+    - '*'
+    paths:
+    - .github/workflows/build-deb.yml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build package
+        uses: jtdor/build-deb-action@v1
+        with:
+          docker-image: ubuntu:jammy
+          buildpackage-opts: --build=binary --no-sign
+          extra-build-deps: git
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: network-manager-fortisslvpn_jammy
+          path: debian/artifacts/network-manager-fortisslvpn_*.deb
+
+      - name: Upload debugging symbols
+        uses: actions/upload-artifact@v4
+        with:
+          name: network-manager-fortisslvpn-dbgsym_jammy
+          path: debian/artifacts/network-manager-fortisslvpn-dbgsym_*.deb
