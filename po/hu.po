@@ -1,0 +1,314 @@
+# Hungarian translation for NetworkManager-fortisslvpn.
+# Copyright (C) 2006, 2007, 2008, 2010, 2011, 2015, 2016, 2017, 2019 Free Software Foundation, Inc.
+# This file is distributed under the same license as the NetworkManager-fortisslvpn package.
+#
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2006, 2007, 2008, 2010, 2012, 2015, 2016.
+# Mate Ory <orymate at ubuntu dot com>, 2011.
+# Balázs Úr <urbalazs at gmail dot com>, 2017, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: NetworkManager-fortisslvpn master\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/NetworkManager-"
+"fortisslvpn/\n"
+"POT-Creation-Date: 2019-03-21 17:04+0100\n"
+"PO-Revision-Date: 2019-01-27 00:56+0100\n"
+"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
+"Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: appdata/network-manager-fortisslvpn.metainfo.xml.in:9
+msgid "Fortinet SSLVPN client"
+msgstr "Fortinet SSLVPN kliens"
+
+#: appdata/network-manager-fortisslvpn.metainfo.xml.in:10
+msgid "Client for Fortinet SSLVPN virtual private networks"
+msgstr "Kliens a Fortinet SSLVPN virtuális magánhálózatokhoz"
+
+#: appdata/network-manager-fortisslvpn.metainfo.xml.in:24
+msgid ""
+"Support for configuring Fortinet SSLVPN virtual private network connections."
+msgstr ""
+"A Fortinet SSLVPN virtuális magánhálózati kapcsolatok beállításának "
+"támogatása."
+
+#: appdata/network-manager-fortisslvpn.metainfo.xml.in:32
+#, fuzzy
+msgid "The advanced options dialog"
+msgstr "SSLVPN speciális beállításai"
+
+#: appdata/network-manager-fortisslvpn.metainfo.xml.in:41
+msgid "The NetworkManager Developers"
+msgstr "A Hálózatkezelő fejlesztői"
+
+#. Otherwise, we have no saved password, or the password flags indicated
+#. * that the password should never be saved.
+#.
+#: auth-dialog/main.c:150
+#, c-format
+msgid "You need to authenticate to access the Virtual Private Network “%s”."
+msgstr "Azonosítania kell magát a(z) „%s” virtuális magánhálózat eléréséhez."
+
+#: auth-dialog/main.c:159 auth-dialog/main.c:183
+msgid "Authenticate VPN"
+msgstr "VPN-hitelesítés"
+
+#: auth-dialog/main.c:162
+#, fuzzy
+msgid "Password:"
+msgstr "Jelszó"
+
+#: auth-dialog/main.c:164
+#, fuzzy
+msgid "Token:"
+msgstr "Jelsor"
+
+#: auth-dialog/main.c:187
+#, fuzzy
+msgid "_Token:"
+msgstr "_Jelsor"
+
+#: properties/nm-fortisslvpn-editor-plugin.c:38
+msgid "Fortinet SSLVPN"
+msgstr "Fortinet SSLVPN"
+
+#: properties/nm-fortisslvpn-editor-plugin.c:39
+msgid "Compatible with Fortinet SSLVPN servers."
+msgstr "Kompatibilis a Fortinet SSLVPN kiszolgálókkal."
+
+#: shared/nm-utils/nm-shared-utils.c:264
+#, c-format
+msgid "object class '%s' has no property named '%s'"
+msgstr "a(z) „%s” objektumosztálynak nincs „%s” nevű tulajdonsága"
+
+#: shared/nm-utils/nm-shared-utils.c:271
+#, c-format
+msgid "property '%s' of object class '%s' is not writable"
+msgstr "a(z) „%s” objektumosztály „%s” tulajdonsága nem írható"
+
+#: shared/nm-utils/nm-shared-utils.c:278
+#, c-format
+msgid ""
+"construct property \"%s\" for object '%s' can't be set after construction"
+msgstr ""
+"a(z) %2$s objektum „%1$s” konstrukciós tulajdonsága nem állítható be a "
+"létrehozása után"
+
+#: shared/nm-utils/nm-shared-utils.c:286
+#, c-format
+msgid "'%s::%s' is not a valid property name; '%s' is not a GObject subtype"
+msgstr ""
+"a(z) „%s::%s” nem egy érvényes tulajdonságnév; „%s” nem egy GObject altípus"
+
+#: shared/nm-utils/nm-shared-utils.c:295
+#, c-format
+msgid "unable to set property '%s' of type '%s' from value of type '%s'"
+msgstr ""
+"a(z) „%s” „%s” típusú tulajdonság értéke nem állítható be „%s” típusú "
+"értékből"
+
+#: shared/nm-utils/nm-shared-utils.c:306
+#, c-format
+msgid ""
+"value \"%s\" of type '%s' is invalid or out of range for property '%s' of "
+"type '%s'"
+msgstr ""
+"a(z) „%s” „%s” típusú érték érvénytelen, vagy kívül esik a tartományon a(z) "
+"„%s” „%s” típusú tulajdonságnál"
+
+#: shared/nm-utils/nm-vpn-plugin-utils.c:69
+#, c-format
+msgid "unable to get editor plugin name: %s"
+msgstr "nem lehet lekérni a szerkesztőbővítmény nevét: %s"
+
+#: shared/nm-utils/nm-vpn-plugin-utils.c:103
+#, c-format
+msgid "missing plugin file \"%s\""
+msgstr "hiányzó bővítményfájl: „%s”"
+
+#: shared/nm-utils/nm-vpn-plugin-utils.c:109
+#, c-format
+msgid "cannot load editor plugin: %s"
+msgstr "a szerkesztő bővítmény nem tölthető be: %s"
+
+#: shared/nm-utils/nm-vpn-plugin-utils.c:118
+#, c-format
+msgid "cannot load factory %s from plugin: %s"
+msgstr "a(z) %s gyár nem tölthető be a bővítményből: %s"
+
+#: shared/nm-utils/nm-vpn-plugin-utils.c:144
+msgid "unknown error creating editor instance"
+msgstr "ismeretlen hiba a szerkesztő példány létrehozásakor"
+
+#: src/nm-fortisslvpn-service.c:222
+msgid "Could not find the openfortivpn binary."
+msgstr "Nem található az openfortivpn program."
+
+#: src/nm-fortisslvpn-service.c:350
+msgid "Missing VPN username."
+msgstr "Hiányzó VPN-felhasználónév."
+
+#: src/nm-fortisslvpn-service.c:360
+msgid "Missing or invalid VPN password."
+msgstr "Hiányzó vagy érvénytelen VPN-jelszó."
+
+#: src/nm-fortisslvpn-service.c:609
+msgid "Don’t quit when VPN connection terminates"
+msgstr "Ne lépjen ki, ha a VPN-kapcsolat megszakad"
+
+#: src/nm-fortisslvpn-service.c:610
+msgid "Enable verbose debug logging (may expose passwords)"
+msgstr ""
+"Részletes hibakeresési naplózás engedélyezése (jelszavak is a naplóba "
+"kerülhetnek)"
+
+#: src/nm-fortisslvpn-service.c:611
+msgid "D-Bus name to use for this instance"
+msgstr "A példányhoz használandó D-Bus név"
+
+#: src/nm-fortisslvpn-service.c:632
+msgid ""
+"nm-fortisslvpn-service provides integrated SSLVPN capability (compatible "
+"with Fortinet) to NetworkManager."
+msgstr ""
+"Az nm-fortisslvpn-service integrált SSLVPN (Fortinet-kompatibilis) "
+"támogatást nyújt a Hálózatkezelőhöz."
+
+#: properties/nm-fortisslvpn-dialog.ui:8
+msgid "SSLVPN Advanced Options"
+msgstr "SSLVPN speciális beállításai"
+
+#: properties/nm-fortisslvpn-dialog.ui:73
+#: properties/nm-fortisslvpn-dialog.ui:375
+msgid "Authentication"
+msgstr "Hitelesítés"
+
+#: properties/nm-fortisslvpn-dialog.ui:89
+msgid "_Realm"
+msgstr ""
+
+#: properties/nm-fortisslvpn-dialog.ui:103
+#: properties/nm-fortisslvpn-dialog.ui:361
+msgid ""
+"SSLVPN server IP or name.\n"
+"config: the first parameter of fortisslvpn"
+msgstr ""
+"SSLVPN kiszolgáló IP vagy név.\n"
+"config: a fortisslvpn első paramétere"
+
+#: properties/nm-fortisslvpn-dialog.ui:117
+msgid "Security"
+msgstr "Biztonság"
+
+#: properties/nm-fortisslvpn-dialog.ui:133
+#, fuzzy
+msgid "Trusted _certificate"
+msgstr "Megbízható tanúsítvány"
+
+#: properties/nm-fortisslvpn-dialog.ui:147
+msgid ""
+"A SHA256 sum of the X509 certificate that will be accepted even if the "
+"certificate is not trusted by a certificate authority."
+msgstr ""
+"Azon X509 tanúsítvány SHA256 ellenőrzőösszege, ami akkor is el lesz fogadva, "
+"ha a tanúsítványt nem fogadta el egy hitelesítésszolgáltató."
+
+#: properties/nm-fortisslvpn-dialog.ui:162
+#, fuzzy
+msgid "_One time password"
+msgstr "_Egyszer használható jelszó használata"
+
+#: properties/nm-fortisslvpn-dialog.ui:237
+#, fuzzy
+msgid "User _Key"
+msgstr "Felhasználói kulcs"
+
+#: properties/nm-fortisslvpn-dialog.ui:251
+#, fuzzy
+msgid "_User Certificate"
+msgstr "Felhasználói tanúsítvány"
+
+#: properties/nm-fortisslvpn-dialog.ui:265
+#, fuzzy
+msgid "_CA Certificate"
+msgstr "CA tanúsítvány"
+
+#: properties/nm-fortisslvpn-dialog.ui:277
+msgid "Show password"
+msgstr "Jelszó megjelenítése"
+
+#: properties/nm-fortisslvpn-dialog.ui:293
+msgid "Password passed to SSLVPN when prompted for it."
+msgstr "A SSLVPN-nek átadott jelszó, amikor kéri."
+
+#: properties/nm-fortisslvpn-dialog.ui:306
+msgid ""
+"Set the name used for authenticating the local system to the peer to "
+"<name>.\n"
+"config: user <name>"
+msgstr ""
+"A helyi rendszer partner felé hitelesítéséhez használt <név> megadása.\n"
+"config: user <név>"
+
+#: properties/nm-fortisslvpn-dialog.ui:319
+#, fuzzy
+msgid "_Password"
+msgstr "Jelszó"
+
+#: properties/nm-fortisslvpn-dialog.ui:333
+#, fuzzy
+msgid "User _name"
+msgstr "Felhasználónév"
+
+#: properties/nm-fortisslvpn-dialog.ui:347
+msgid "_Gateway"
+msgstr "Á_tjáró"
+
+#: properties/nm-fortisslvpn-dialog.ui:391
+msgid "General"
+msgstr "Általános"
+
+#: properties/nm-fortisslvpn-dialog.ui:434
+msgid "A_dvanced…"
+msgstr "Spe_ciális…"
+
+#: properties/nm-fortisslvpn-dialog.ui:463
+msgid "Default"
+msgstr "Alapértelmezett"
+
+#~ msgid "invalid gateway “%s”"
+#~ msgstr "érvénytelen átjáró: „%s”"
+
+#~ msgid "invalid certificate authority “%s”"
+#~ msgstr "érvénytelen hitelesítésszolgáltató: „%s”"
+
+#~ msgid "invalid integer property “%s”"
+#~ msgstr "érvénytelen egész érték: „%s”"
+
+#~ msgid "invalid boolean property “%s” (not yes or no)"
+#~ msgstr "érvénytelen logikai érték: „%s” (érvényes értékek: yes, no)"
+
+#~ msgid "unhandled property “%s” type %s"
+#~ msgstr "kezeletlen %2$s típusú érték: „%1$s”"
+
+#~ msgid "property “%s” invalid or not supported"
+#~ msgstr "érvénytelen vagy nem támogatott érték: „%s”"
+
+#~ msgid "No VPN configuration options."
+#~ msgstr "Nincsenek VPN-beállítások."
+
+#~ msgid "Missing required option “%s”."
+#~ msgstr "Hiányzó kötelező argumentum: „%s”."
+
+#~ msgid "No VPN secrets!"
+#~ msgstr "Nincs VPN-titok!"
+
+#~ msgid ""
+#~ "Ask for an one-time password (OTP) for two factor authentication (2FA)."
+#~ msgstr ""
+#~ "Egy egyszer használható jelszó (OTP) bekérése a kétfaktoros "
+#~ "hitelesítéshez (2FA)."
