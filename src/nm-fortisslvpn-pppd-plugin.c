@@ -219,6 +219,68 @@ get_ip4_routes (in_addr_t ouraddr)
 	return NULL;
 }
 
+static GVariant *
+get_ip4_splitdns ()
+{
+	GVariantBuilder builder;
+	GVariant *value;
+	int i;
+
+	g_variant_builder_init (&builder, G_VARIANT_TYPE ("aau"));
+
+	for (i = 0; i < 100; i++) {
+		GVariantBuilder array;
+		GVariant *val;
+		gchar *var;
+		const gchar *str;
+		gchar *domains;
+		guint32 dns[2];
+		int len = 0;
+
+		var = g_strdup_printf ("VPN_SPLITDNS_DOMAIN_%d", i);
+		str = g_getenv (var);
+		g_free (var);
+		if (!str || !*str)
+			break;
+		domains = g_strdup(str);
+
+		var = g_strdup_printf ("VPN_SPLITDNS_SERVER1_%d", i);
+		str = g_getenv (var);
+		g_free (var);
+		if (!str || !*str)
+			break;
+		dns[len++] = inet_addr (str);
+
+		var = g_strdup_printf ("VPN_SPLITDNS_SERVER2_%d", i);
+		str = g_getenv (var);
+		g_free (var);
+		if (!str || !*str)
+			break;
+		dns[len++] = inet_addr (str);
+
+		_LOGW ("ip-up, set_ip4_domains: %s, %x", domains, dns[0]);
+
+		g_variant_builder_init (&array, G_VARIANT_TYPE ("a{sv}"));
+		g_variant_builder_add (&array, "{sv}",
+		                       NM_VPN_PLUGIN_IP4_CONFIG_DNS,
+		                       g_variant_new_fixed_array (G_VARIANT_TYPE_UINT32,
+		                                                  dns, len, sizeof (guint32)));
+		val = g_variant_new_strv ((const gchar **) &domains, strlen(domains));
+		g_variant_builder_add (&array, "{sv}",
+	                       NM_VPN_PLUGIN_IP4_CONFIG_DOMAINS,
+	                       g_variant_new_string(domains));
+		g_variant_builder_add_value (&builder, g_variant_builder_end (&array));
+		g_free(domains);
+	}
+
+	value = g_variant_builder_end (&builder);
+	if (i > 0)
+		return value;
+
+	g_variant_unref (value);
+	return NULL;
+}
+
 static void
 nm_ip_up (void *data, int arg)
 {
@@ -298,6 +360,10 @@ nm_ip_up (void *data, int arg)
 		                       g_variant_new_fixed_array (G_VARIANT_TYPE_UINT32,
 		                                                  dns, len, sizeof (guint32)));
 	}
+
+	val = get_ip4_splitdns ();
+	if (val)
+		g_variant_builder_add (&builder, "{sv}", "split-dns"/* NM_VPN_PLUGIN_IP4_CONFIG_SPLITDNS */, val);
 
 	/* Default MTU to 1400, which is also what Windows XP/Vista use */
 	g_variant_builder_add (&builder, "{sv}",
