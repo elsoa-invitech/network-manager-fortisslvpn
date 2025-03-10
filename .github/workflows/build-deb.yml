@@ -28,10 +28,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: network-manager-fortisslvpn_jammy
-          path: debian/artifacts/network-manager-fortisslvpn_*.deb
+          path: |
+            debian/artifacts/network-manager-fortisslvpn_*.deb
+            debian/artifacts/network-manager-fortisslvpn-gnome_*.deb
 
       - name: Upload debugging symbols
         uses: actions/upload-artifact@v4
         with:
           name: network-manager-fortisslvpn-dbgsym_jammy
-          path: debian/artifacts/network-manager-fortisslvpn-dbgsym_*.deb
+          path: |
+            debian/artifacts/network-manager-fortisslvpn-dbgsym_*.deb
+            debian/artifacts/network-manager-fortisslvpn-gnome-dbgsym_*.deb
