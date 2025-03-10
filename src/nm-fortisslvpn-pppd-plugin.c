@@ -165,7 +165,7 @@ get_ip4_routes (in_addr_t ouraddr)
 
 	g_variant_builder_init (&builder, G_VARIANT_TYPE ("aau"));
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 65535; i++) {
 		GVariantBuilder array;
 		gchar *var;
 		const gchar *str;
